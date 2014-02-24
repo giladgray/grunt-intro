@@ -1,0 +1,18 @@
+{
+  "name": "grunt-intro",
+  "version": "0.0.0",
+  "authors": [
+    "Gilad Gray <giladgray@gmail.com>"
+  ],
+  "description": "an introduction to pastoral web development",
+  "main": "app/index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
