@@ -1,4 +1,4 @@
-LIVERELOAD_PORT = 35729;
+LIVERELOAD_PORT = 35729
 lrSnippet = require('connect-livereload')(port: LIVERELOAD_PORT)
 mountFolder = (connect, dir) ->
     connect.static(require('path').resolve(dir))
@@ -14,7 +14,7 @@ module.exports = (grunt) ->
   # a simple way to load all the grunt plugins we have installed
   require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
 
-  options =
+  yeoman =
     app: 'app'
     temp: '.tmp'
     dist: 'dist'
@@ -23,69 +23,70 @@ module.exports = (grunt) ->
   the main entry point for grunt: a massive object with configuration options
   for all of our grunt plugins.
   ###
-  grunt.initConfig
-    options: options
+  grunt.initConfig {
+    yeoman: yeoman
 
     # grunt-contrib-clean
     clean:
       dist:
         files: [
-          '<%= options.temp %>'
-          '<%= options.dist %>/*'
-          '!<%= options.dist %>/.git*'
+          '<%= yeoman.temp %>'
+          '<%= yeoman.dist %>/*'
+          '!<%= yeoman.dist %>/.git*'
         ]
-      server: '<%= options.temp %>'
+      server: '<%= yeoman.temp %>'
 
     # grunt-contrib-coffee
     coffee:
       dist:
-        files:
+        files: [
           expand: true
-          cwd: '<%= options.app %>/scripts'
+          cwd: '<%= yeoman.app %>/scripts'
           src: '{,*/}*.coffee'
-          dest: '<%= options.temp %>/styles'
+          dest: '<%= yeoman.temp %>/scripts'
           ext: '.js'
-        options: {}
+        ]
 
     # grunt-contrib-sass
     sass:
       dist:
-        files:
+        files: [
           expand: true
-          cwd: '<%= options.app %>/styles'
+          cwd: '<%= yeoman.app %>/styles'
           src: '{,*/}*.{sass,scss}'
-          dest: '<%= options.temp %>/styles'
+          dest: '<%= yeoman.temp %>/styles'
           ext: '.css'
+        ]
 
     # grunt-contrib-handlebars
     handlebars:
       dist:
         files:
-          '<%= options.temp %>/templates.js': '<%= options.app %>/templates/{,*/}*.hbs'
+          '<%= yeoman.temp %>/templates.js': '<%= yeoman.app %>/templates/{,*/}*.hbs'
         options:
           namespace: 'Templates'
           processName: (filePath) ->
-            filename.match(/^<%= options.app %>\/templates\/(.+)\.h[bj]s$/)[1]
+            filename.match(/^<%= yeoman.app %>\/templates\/(.+)\.h[bj]s$/)[1]
 
     # grunt-contrib-watch
     watch:
       coffee:
-        files: ['<%= options.app %>/scripts/{,*/}.coffee']
+        files: ['<%= yeoman.app %>/scripts/{,*/}.coffee']
         tasks: ['coffee:dist']
       styles:
-        files: ['<%= options.app %>/styles/{,*/}.{sass,scss}']
+        files: ['<%= yeoman.app %>/styles/{,*/}.{sass,scss}']
         tasks: ['styles:dist']
       handlebars:
-        files: ['<%= options.app %>/templates/{,*/}.hbs']
+        files: ['<%= yeoman.app %>/templates/{,*/}.hbs']
         tasks: ['handlebars:dist']
       livereload:
         options:
           livereload: LIVERELOAD_PORT
         files: [
-          '<%= options.app %>/*.html'
-          '{<%= options.temp %>,<%= yeoman.<%= options.app %> %>}/styles/{,*/}*.css',
-          '{<%= options.temp %>,<%= yeoman.<%= options.app %> %>}/scripts/{,*/}*.js',
-          '<%= yeoman.<%= options.app %> %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/*.html'
+          '{<%= yeoman.temp %>,<%= yeoman.<%= yeoman.app %> %>}/styles/{,*/}*.css',
+          '{<%= yeoman.temp %>,<%= yeoman.<%= yeoman.app %> %>}/scripts/{,*/}*.js',
+          '<%= yeoman.<%= yeoman.app %> %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
 
     # grunt-contrib-connect
@@ -99,16 +100,16 @@ module.exports = (grunt) ->
           middleware: (connect) ->
             return [
               lrSnippet
-              mountFolder connect, options.temp
+              mountFolder connect, yeoman.temp
               mountFolder connect, 'bower_components'
-              mountFolder connect, options.app
+              mountFolder connect, yeoman.app
             ]
       dist:
         options:
           middleware: (connect) ->
-            return [mountFolder(connect, options.dist)]
+            return [mountFolder(connect, yeoman.dist)]
 
-    # grunt-contrib-open
+    # grunt-open
     open:
       server:
         path: 'http://localhost:<%= connect.options.port %>'
@@ -120,11 +121,12 @@ module.exports = (grunt) ->
     #       expand: true
     #       cwd: 'src'
     #       src: '{,*/}*.coffee'
-    #       dest: '<%= options.temp %>'
+    #       dest: '<%= yeoman.temp %>'
     #       ext: '.js'
     #     }, {'dist/test/spec.js': 'test/src/spec.coffee'}]
     #     options: {}
     # ...
+  }
 
   ###
   compose our top-level tasks from our individual plugins.
