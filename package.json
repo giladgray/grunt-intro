@@ -1,0 +1,23 @@
+{
+  "name": "grunt-intro",
+  "version": "0.0.0",
+  "description": "an introduction to web development with Grunt",
+  "main": "index.js",
+  "dependencies": {
+    "connect-livereload": "~0.3.2",
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-connect": "~0.7.0",
+    "grunt-contrib-handlebars": "~0.6.1",
+    "grunt-contrib-sass": "~0.7.2",
+    "matchdep": "~0.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": "",
+  "author": "Gilad Gray",
+  "license": "BSD"
+}
