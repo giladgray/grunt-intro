@@ -33,18 +33,19 @@ project/
 │ └── index.html
 ├─┬ test/
 │ └── *-spec.coffee
-├─┬ .tmp/
+├─┬ [.tmp/]
 │ └── development files
-├─┬ dist/
+├─┬ [dist/]
 │ └── production files
-├── node_modules/
-├── bower_components/
+├── [node_modules/]
+├── [bower_components/]
 ├── .editorconfig
 ├── .gitignore
 ├── bower.json
 ├── package.json
 ├── Gruntfile.coffee
 └── README.md
+[folders in brackets are excluded from source control]
 ```
 I find that for a small app developed by a handful of people at most, this structure tends to work wonders. Files are easy to locate and any one folder rarely grows too large. I'll tend to introduce subfolders to my `scripts/` directory, such as `models/` and `views/` if I'm building a Backbone app. It can also help to split `templates/` into layouts, partials, and view templates. I find that `styles/` rarely grows large enough to warrant subfolders: a CSS framework does most of the heavy lifting there.
 
