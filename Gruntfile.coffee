@@ -32,12 +32,11 @@ module.exports = (grunt) ->
 
     # grunt-contrib-clean
     clean:
-      dist:
-        files: [
-          '<%= yeoman.temp %>'
-          '<%= yeoman.dist %>/*'
-          '!<%= yeoman.dist %>/.git*'
-        ]
+      dist: [
+        '<%= yeoman.temp %>'
+        '<%= yeoman.dist %>/*'
+        '!<%= yeoman.dist %>/.git*'
+      ]
       server: '<%= yeoman.temp %>'
 
     # grunt-contrib-coffee
@@ -66,11 +65,11 @@ module.exports = (grunt) ->
     handlebars:
       dist:
         files:
-          '<%= yeoman.temp %>/templates.js': '<%= yeoman.app %>/templates/{,*/}*.hbs'
+          '<%= yeoman.temp %>/scripts/templates.js': ['<%= yeoman.app %>/templates/{,*/}*.hbs']
         options:
           namespace: 'Templates'
-          processName: (filePath) ->
-            filename.match(/^<%= yeoman.app %>\/templates\/(.+)\.h[bj]s$/)[1]
+          processName: (filename) ->
+            filename.match(/templates\/(.+)\.h[bj]s$/)[1]
 
     # grunt-contrib-watch
     watch:
@@ -138,15 +137,16 @@ module.exports = (grunt) ->
   grunt.registerTask 'name', 'description', ['task', 'task:target', ...]
   ###
   grunt.registerTask 'serve', 'compile and serve files for development', [
-    'build',
-    'connect:livereload',
-    'open',
+    'build'
+    'connect:livereload'
+    'open'
     'watch'
   ]
 
   grunt.registerTask 'build', 'compile source files for production', [
-    'coffee',
-    'sass',
+    'clean'
+    'coffee'
+    'sass'
     'handlebars'
   ]
 
