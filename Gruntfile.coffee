@@ -104,7 +104,6 @@ module.exports = (grunt) ->
             return [
               lrSnippet
               mountFolder connect, yeoman.temp
-              mountFolder connect, 'bower_components'
               mountFolder connect, yeoman.app
             ]
       dist:
@@ -116,6 +115,11 @@ module.exports = (grunt) ->
     open:
       server:
         path: 'http://localhost:<%= connect.options.port %>'
+
+    symlink:
+      bower:
+        src: 'bower_components'
+        dest: '.tmp/bower_components'
 
     # standard task definition looks like so:
     # <task>:
@@ -132,22 +136,25 @@ module.exports = (grunt) ->
     #     options: {}
   }
 
+  grunt.registerTask 'compile', 'compile source files to temporary directory', [
+    'clean'
+    'coffee'
+    'sass'
+    'handlebars'
+    'symlink'
+  ]
+
   ###
   compose our top-level tasks from our individual plugins.
   grunt.registerTask 'name', 'description', ['task', 'task:target', ...]
   ###
   grunt.registerTask 'serve', 'compile and serve files for development', [
-    'build'
+    'compile'
     'connect:livereload'
     'open'
     'watch'
   ]
 
-  grunt.registerTask 'build', 'compile source files for production', [
-    'clean'
-    'coffee'
-    'sass'
-    'handlebars'
   ]
 
   grunt.registerTask 'test', 'run unit tests', [
