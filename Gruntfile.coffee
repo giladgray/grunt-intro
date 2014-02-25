@@ -121,6 +121,33 @@ module.exports = (grunt) ->
         src: 'bower_components'
         dest: '.tmp/bower_components'
 
+    useminPrepare:
+      html: '<%= yeoman.app %>/index.html'
+      options:
+        root: '<%= yeoman.temp %>'
+        dest: '<%= yeoman.dist %>'
+
+    usemin:
+      options:
+        dirs: ['<%= yeoman.dist %>']
+      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      # css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
+
+    copy:
+      dist:
+        files: [
+          expand: true,
+          cwd: '<%= yeoman.app %>'
+          dest: '<%= yeoman.dist %>'
+          src: [
+            '*.html'
+            '*.{ico,png,txt}'
+            '.htaccess'
+            'images/{,*/}*.{jpg,png,gif}' # TODO: imgmin
+            'styles/fonts/*'
+          ]
+        ]
+
     # standard task definition looks like so:
     # <task>:
     #   <target>:
@@ -155,6 +182,16 @@ module.exports = (grunt) ->
     'watch'
   ]
 
+  grunt.registerTask 'build', 'compile source files for production and launch prod server', [
+    'compile'
+    'copy'
+    'useminPrepare'
+    'concat'
+    'uglify'
+    'cssmin'
+    'usemin'
+    'open'
+    'connect:dist:keepalive'
   ]
 
   grunt.registerTask 'test', 'run unit tests', [
