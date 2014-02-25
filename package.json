@@ -1,6 +1,6 @@
 {
   "name": "grunt-intro",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "an introduction to web development with Grunt",
   "main": "index.js",
   "devDependencies": {
