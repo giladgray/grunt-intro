@@ -75,22 +75,22 @@ module.exports = (grunt) ->
     # grunt-contrib-watch
     watch:
       coffee:
-        files: ['<%= yeoman.app %>/scripts/{,*/}.coffee']
+        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee']
         tasks: ['coffee:dist']
       styles:
-        files: ['<%= yeoman.app %>/styles/{,*/}.{sass,scss}']
-        tasks: ['styles:dist']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{sass,scss}']
+        tasks: ['sass:dist']
       handlebars:
-        files: ['<%= yeoman.app %>/templates/{,*/}.hbs']
+        files: ['<%= yeoman.app %>/templates/{,*/}*.hbs']
         tasks: ['handlebars:dist']
       livereload:
         options:
           livereload: LIVERELOAD_PORT
         files: [
           '<%= yeoman.app %>/*.html'
-          '{<%= yeoman.temp %>,<%= yeoman.<%= yeoman.app %> %>}/styles/{,*/}*.css',
-          '{<%= yeoman.temp %>,<%= yeoman.<%= yeoman.app %> %>}/scripts/{,*/}*.js',
-          '<%= yeoman.<%= yeoman.app %> %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '{<%= yeoman.temp %>,<%= yeoman.app %>}/styles/{,*/}*.css',
+          '{<%= yeoman.temp %>,<%= yeoman.app %>}/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
 
     # grunt-contrib-connect
