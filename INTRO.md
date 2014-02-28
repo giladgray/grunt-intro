@@ -100,7 +100,7 @@ module.exports = (grunt) ->
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css({.tmp,app}) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
+        <!-- <link rel="stylesheet" href=""> will go here -->
         <!-- endbuild -->
     </head>
     <body>
@@ -108,9 +108,7 @@ module.exports = (grunt) ->
         <div id="main"></div>
 
         <!-- build:js scripts/main.js -->
-        <script src="bower_components/handlebars/handlebars.runtime.js"></script>
-        <script src="scripts/templates.js"></script>
-        <script src="scripts/main.js"></script>
+        <!-- <script src=""> tags will go here -->
         <!-- endbuild -->
 </body>
 </html>
@@ -344,7 +342,7 @@ There's a pretty awesome plugin called `usemin` that will basically be our entir
       ]
   ```
 
-# Other Things
+# Further Education
 - Web scaffolding: [Yeoman](http://yeoman.io)
   - [Fantastic tutorial](http://yeoman.io/codelab.html)
 - Other build tools:

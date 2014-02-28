@@ -87,7 +87,7 @@ module.exports = (grunt) ->
         files: ['<%= yeoman.app %>/templates/{,*/}*.hbs']
         tasks: ['handlebars:dist']
       markdown:
-        files: ['<%= yeoman.app %>/*.md']
+        files: ['*.md']
         tasks: ['markdown']
       livereload:
         options:
