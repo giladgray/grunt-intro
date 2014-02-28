@@ -2,9 +2,13 @@
 ### Pastoral web development with Grunt and Bower
 
 ## Usage
-* `git clone`
+* `brew install node`
+* `npm install -g grunt-cli bower`
+* `git clone` this repo, `cd grunt-intro`
 * `npm install && bower install`
 * `grunt serve`
+
+Or just view [INTRO.md](INTRO.md) on GitHub and follow along :)
 
 ## Education
 **Steps to get started:**
