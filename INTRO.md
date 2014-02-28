@@ -277,7 +277,7 @@ Great, we can compile our templates in Grunt. But in order to run them in the br
   ```
 3. add `'handlebars'` and `'symlink'` to `compile` task list
 
-# 5. Production!
+# 6. Production!
 Making your source ready for production doesn't have to be hard! Actually, if you've learned one thing here, I hope it's that JavaScript development itself doesn't have to be hard.
 
 There's a pretty awesome plugin called `usemin` that will basically be our entire workflow. You may have noticed a block like this in `index.html`:
