@@ -5,8 +5,8 @@
 @import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/_navs.scss"
 
 $padding: 0.3em
-$big-padding: 1em
-$sidebar-width: 180px
+$big-padding: 2em
+$sidebar-width: 200px
 
 .main
 	body
@@ -24,6 +24,23 @@ $sidebar-width: 180px
 		padding: 1em
 		display: inline-block
 
+#toggleMenu
+	position: fixed
+	top: 0
+	left: 0
+	display: block
+	z-index: 10
+
+	padding: $padding
+	font-weight: bold
+	font-size: 20px
+	text-decoration: none
+	color: #aaa
+	@include rotate(90deg)
+
+	&:hover
+		background: #ddd
+
 .navbar
 	position: fixed
 	top: 0
@@ -32,29 +49,42 @@ $sidebar-width: 180px
 	overflow: scroll
 	width: $sidebar-width
 	background: #efefef
+	overflow: hidden
+	@include transition(width .3s ease)
 
-	li
+	&.collapsed
+		width: 0
 
-		a
-			text-decoration: none
-			color: inherit
+	.nav
+		margin-top: 3em
 
-			&:hover
-				color: #333
-				background: #ddd
+		li
+			a
+				text-decoration: none
+				color: inherit
+				white-space: nowrap
 
-		&.active
-			background: #ccc
+				&:hover
+					color: #333
+					background: #ddd
+
+			&.active
+				background: #ccc
 
 .content
 	position: absolute
-	left: $sidebar-width + 1px
+	left: $sidebar-width
 	right: 0
 	padding-left: $big-padding
-	box-shadow: 0 0 6px rgba(0,0,0,0.3)
+	box-shadow: 0 0 6px rgba(0,0,0,0.5)
 
 	font-family: 'Georgia', serif
 	font-size: 20px
+
+	@include transition(left .3s ease)
+
+	.collapsed + &
+		left: 0
 
 	h1
 		font-size: 2em
