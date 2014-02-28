@@ -167,7 +167,7 @@ module.exports = (grunt) ->
           {'.tmp/README.html': 'README.md'}
           {
             expand: true
-            cwd: '<%= yeoman.app %>'
+            # cwd: '.'
             src: '*.md'
             dest: '<%= yeoman.temp %>'
             ext: '.html'
