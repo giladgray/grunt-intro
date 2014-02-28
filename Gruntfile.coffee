@@ -4,6 +4,10 @@ lrSnippet = require('connect-livereload')(port: LIVERELOAD_PORT)
 mountFolder = (connect, dir) ->
     connect.static(require('path').resolve(dir))
 
+hljs = require('highlight.js')
+hljs.configure
+  classPrefix: ''
+
 ###
 The only requirement of a Gruntfile is that it exports a function that accepts
 the grunt object. In the body of this function, we will do the following:
@@ -82,11 +86,14 @@ module.exports = (grunt) ->
       handlebars:
         files: ['<%= yeoman.app %>/templates/{,*/}*.hbs']
         tasks: ['handlebars:dist']
+      markdown:
+        files: ['<%= yeoman.app %>/*.md']
+        tasks: ['markdown']
       livereload:
         options:
           livereload: LIVERELOAD_PORT
         files: [
-          '<%= yeoman.app %>/*.html'
+          '{<%= yeoman.temp %>,<%= yeoman.app %>}/*.html'
           '{<%= yeoman.temp %>,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{<%= yeoman.temp %>,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -116,11 +123,17 @@ module.exports = (grunt) ->
       server:
         path: 'http://localhost:<%= connect.options.port %>'
 
+    # grunt-contrib-symlink
     symlink:
       bower:
         src: 'bower_components'
         dest: '.tmp/bower_components'
 
+
+    # grunt-usemin
+    # grunt-contrib-concat
+    # grunt-contrib-cssmin
+    # grunt-contrib-uglify
     useminPrepare:
       html: '<%= yeoman.app %>/index.html'
       options:
@@ -130,9 +143,9 @@ module.exports = (grunt) ->
     usemin:
       options:
         dirs: ['<%= yeoman.dist %>']
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      # css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
+      html: ['<%= yeoman.dist %>/{,*/}*.html']
 
+    # grunt-contrib-copy
     copy:
       dist:
         files: [
@@ -147,6 +160,26 @@ module.exports = (grunt) ->
             'styles/fonts/*'
           ]
         ]
+
+    markdown:
+      all:
+        files: [
+          {'.tmp/README.html': 'README.md'}
+          {
+            expand: true
+            cwd: '<%= yeoman.app %>'
+            src: '*.md'
+            dest: '<%= yeoman.temp %>'
+            ext: '.html'
+          }
+        ]
+        options:
+          markdownOptions:
+            gfm: true
+            highlight: (code, lang) ->
+              if lang then hljs.highlight(lang, code).value
+              else         hljs.highlightAuto(code).value
+          template: 'app/talk.html'
 
     # standard task definition looks like so:
     # <task>:
@@ -168,6 +201,7 @@ module.exports = (grunt) ->
     'coffee'
     'sass'
     'handlebars'
+    'markdown'
     'symlink'
   ]
 
