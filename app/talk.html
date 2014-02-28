@@ -7,7 +7,13 @@
         <link rel="stylesheet" href="bower_components/highlight/src/styles/monokai.css">
 
     </head>
-    <body class="talk">
-        <%= content %>
+    <body class="talk" data-spy="scroll" data-target=".navbar">
+        <div class="navbar"></div>
+        <div class="content">
+            <%= content %>
+        </div>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
+        <script src="scripts/main.js"></script>
     </body>
 </html>

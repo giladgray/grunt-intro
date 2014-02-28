@@ -1,5 +1,12 @@
+@import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/_normalize.scss"
+@import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/_variables.scss"
+@import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/_mixins.scss"
+@import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/_utilities.scss"
+@import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/_navs.scss"
+
 $padding: 0.3em
 $big-padding: 1em
+$sidebar-width: 180px
 
 .main
 	body
@@ -17,7 +24,35 @@ $big-padding: 1em
 		padding: 1em
 		display: inline-block
 
-.talk
+.navbar
+	position: fixed
+	top: 0
+	bottom: 0
+	left: 0
+	overflow: scroll
+	width: $sidebar-width
+	background: #efefef
+
+	li
+
+		a
+			text-decoration: none
+			color: inherit
+
+			&:hover
+				color: #333
+				background: #ddd
+
+		&.active
+			background: #ccc
+
+.content
+	position: absolute
+	left: $sidebar-width + 1px
+	right: 0
+	padding-left: $big-padding
+	box-shadow: 0 0 6px rgba(0,0,0,0.3)
+
 	font-family: 'Georgia', serif
 	font-size: 20px
 
