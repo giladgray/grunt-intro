@@ -342,6 +342,20 @@ There's a pretty awesome plugin called `usemin` that will basically be our entir
       ]
   ```
 
+# So You Want a Server
+** No, you probably just need a datastore. **
+### Meet [Parse.com](http://parse.com): backend-as-a-service
+- schemaless JSON datastore (wrapped MongoDB)
+- simple user authentication + third-party services
+- cloud code and cloud modules for validation, emails, whatever
+- push notifications (on supported devices)
+- hosted file storage
+- easy-as-pie SDKs
+- analytics
+- $free
+
+Their [JavaScript SDK](https://parse.com/docs/js_guide) is a fork of Backbone so you can trivially build client-side MVC apps backed by a cloud-hosted datastore. Wowsers.
+
 # Further Education
 - Web scaffolding: [Yeoman](http://yeoman.io)
   - [Fantastic tutorial](http://yeoman.io/codelab.html)
