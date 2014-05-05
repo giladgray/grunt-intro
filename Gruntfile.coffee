@@ -161,6 +161,7 @@ module.exports = (grunt) ->
           ]
         ]
 
+    # grunt-markdown
     markdown:
       all:
         files: [
@@ -180,6 +181,12 @@ module.exports = (grunt) ->
               if lang then hljs.highlight(lang, code).value
               else         hljs.highlightAuto(code).value
           template: 'app/talk.html'
+
+    # grunt-gh-pages
+    'gh-pages':
+      options:
+        base: '.tmp'
+      src: ['**']
 
     # standard task definition looks like so:
     # <task>:
@@ -229,6 +236,10 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'test', 'run unit tests', [
+  ]
+
+  grunt.registerTask 'deploy', 'push to GitHub Pages', [
+    'gh-pages'
   ]
 
   # what to do when you just run 'grunt' with no task name
